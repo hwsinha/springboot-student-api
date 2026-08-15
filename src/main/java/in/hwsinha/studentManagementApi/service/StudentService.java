@@ -5,8 +5,8 @@ import in.hwsinha.studentManagementApi.dto.CreateStudentResponseDto;
 import in.hwsinha.studentManagementApi.dto.UpdateStudentRequestDto;
 import in.hwsinha.studentManagementApi.dto.UpdateStudentResponseDto;
 import in.hwsinha.studentManagementApi.entity.Student;
-//import in.hwsinha.studentManagementApi.exception.DuplicateResourceException;
-//import in.hwsinha.studentManagementApi.exception.ResourceNotFoundException;
+import in.hwsinha.studentManagementApi.exception.DuplicateResourceException;
+import in.hwsinha.studentManagementApi.exception.ResourceNotFoundException;
 import in.hwsinha.studentManagementApi.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +25,10 @@ public class StudentService {
     public CreateStudentResponseDto createStudent(CreateStudentRequestDto studentReqDto) {
         Student student = mapToEntity(studentReqDto);
 
-//        if(emailExists(student)) {
-//            throw new DuplicateResourceException("Student with email " + student.getEmail()
-//                    + " already exists");
-//        }
+        if(emailExists(student)) {
+            throw new DuplicateResourceException("Student with email " + student.getEmail()
+                    + " already exists");
+        }
 
         Student studentResp = studentRepository.save(student);
 
@@ -37,9 +37,9 @@ public class StudentService {
 
     public CreateStudentResponseDto getStudent(Long id) {
         Student studentResp = studentRepository
-//                .findById(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException("Student with id " + id + " not found"));
+                .findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Student with id " + id + " not found"));
 
         return mapToDto(studentResp);
     }
@@ -55,9 +55,9 @@ public class StudentService {
 
     public UpdateStudentResponseDto updateStudent(Long id, UpdateStudentRequestDto studentReq) {
         Student existingStudent = studentRepository
-//                .findByIdAndDeletedIsFalse(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException("Student with id " + id + " not found"));
+                .findByIdAndDeletedIsFalse(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Student with id " + id + " not found"));
 
         existingStudent.setName(studentReq.getName());
         existingStudent.setRollNo(studentReq.getRollNo());
@@ -73,18 +73,18 @@ public class StudentService {
 
     public void deleteStudent(Long id) {
         Student studentToBeDeleted = studentRepository
-//                .findById(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException("Student with id " + id + " not found"));
+                .findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Student with id " + id + " not found"));
 
         studentRepository.delete(studentToBeDeleted);
     }
 
     public void deleteStudentSoftly(Long id) {
         Student studentToBeDeleted = studentRepository
-//                .findByIdAndDeletedIsFalse(id)
-//                .orElseThrow(() ->
-//                        new ResourceNotFoundException("Student with id " + id + " not found"));
+                 .findByIdAndDeletedIsFalse(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Student with id " + id + " not found"));
 
         studentToBeDeleted.setDeleted(true);
         studentRepository.save(studentToBeDeleted);
