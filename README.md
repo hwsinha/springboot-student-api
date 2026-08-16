@@ -1,23 +1,5 @@
 # Student Management REST API
 
-A RESTful Student Management API built with **Spring Boot**, **Spring Data JPA**, **Hibernate**, and **MySQL**. The application demonstrates CRUD operations following a layered architecture (Controller → Service → Repository) and includes support for **Soft Delete**.
-
----
-
-## Features
-
-- Create a Student
-- Retrieve Student by ID
-- Retrieve All Students
-- Update Student Details
-- Permanently Delete a Student
-- Soft Delete (Logical Delete)
-- RESTful API
-- MySQL Database Integration
-- Layered Architecture
-
----
-
 ## Tech Stack
 
 - Java 21
@@ -38,12 +20,12 @@ springboot-student-api
 ├── src
 │   ├── main
 │   │   ├── java
-│   │   │   └── in.strikes.crudSpringBootDemo
+│   │   │   └── in.hwsinha.studentManagementApi
 │   │   │       ├── controller
 │   │   │       ├── entity
 │   │   │       ├── repository
 │   │   │       ├── service
-│   │   │       └── CrudSpringBootDemoApplication.java
+│   │   │       └── CrudApplication.java
 │   │   └── resources
 │   │       └── application.properties
 │   └── test
@@ -119,11 +101,6 @@ http://localhost:8080
 
 ---
 
-## Soft Delete
-
-Instead of permanently removing records, the application also supports **Soft Delete** by updating a `deleted` flag. Soft deleted records are excluded from retrieval operations while remaining stored in the database.
-
----
 
 ## Sample Student JSON
 
